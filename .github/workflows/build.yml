@@ -17,5 +17,8 @@ jobs:
         run: |
             go build
             echo ${CGO_ENABLED}
+      - name: Run Tests
+        run: |
+            go test
         # or
         # - run: echo ABC
