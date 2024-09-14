@@ -24,9 +24,9 @@ jobs:
         run: |
             go test
             ./myproject & 
+            sleep 2
             res= $(curl localhost:3000)
             [[ $res == 'Hello, World!' ]] || exit 1
-            echo $?
   docker-build:
       runs-on: ubuntu-22.04  
       needs: [build]
