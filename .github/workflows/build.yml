@@ -1,0 +1,18 @@
+on: push
+
+name: Integration
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.18.3'
+          cache: true
+      - run: |
+          go build
+      # or
+      # - run: echo ABC
