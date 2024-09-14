@@ -23,8 +23,8 @@ jobs:
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - name: Build Docker image
         run: |
-          docker build . -t $DOCKER_NAME:$VERSION
+          docker build . -t $DOCKER_NAME
       - name: Push Docker Image
         run: |
-          docker push $DOCKER_NAME:$VERSION
+          docker push $DOCKER_NAME
         
