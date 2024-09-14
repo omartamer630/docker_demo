@@ -9,7 +9,7 @@ jobs:
   release:
     name: Release
     env:
-      DOCKER_NAME: golang_app
+      DOCKER_NAME: omartamer12/golang_app
       VERSION: ${GITHUB_REF##*/}
     runs-on: ubuntu-22.04
     steps:
