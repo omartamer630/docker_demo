@@ -1,0 +1,30 @@
+on:
+  push:
+    tags:
+      - "**"
+
+name: Delivery
+
+jobs:
+  release:
+    name: Release
+    env:
+      DOCKER_NAME: golang_app
+      VERSION: ${GITHUB_REF##*/}
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/setup-buildx-action@v3
+      - name: Log in to GitHub Container Registry
+        env:
+          DOCKER_USERNAME: omartamer12
+          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - name: Build Docker image
+        run: |
+          docker build . -t $DOCKER_NAME:$VERSION
+      - name: Push Docker Image
+        run: |
+          docker push $DOCKER_NAME:$VERSION
+        
