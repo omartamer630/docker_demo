@@ -17,11 +17,16 @@ jobs:
         env:
           CGO_ENABLED: 0
         run: |
-            go build
+            go build -o myproject
             echo ${CGO_ENABLED}
       - name: Run Tests
+        shell: bash
         run: |
-            go test 
+            go test
+            ./myproject & 
+            res= $(curl localhost:3000)
+            [[ $res == 'Hello, World!' ]] || exit 1
+            echo $?
   docker-build:
       runs-on: ubuntu-22.04  
       needs: [build]
