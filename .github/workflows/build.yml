@@ -20,5 +20,13 @@ jobs:
       - name: Run Tests
         run: |
             go test
+  docker-build:
+      runs-on: ubuntu-22.04  
+      needs: [build]
+      steps:
+        - uses: actions/checkout@v2
+        - name: build
+          run: |
+            docker build -t goappimage .
         # or
         # - run: echo ABC
